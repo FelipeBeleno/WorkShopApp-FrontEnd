@@ -123,14 +123,11 @@ export const Index = () => {
                     </Container>
 
                 </div>
-
                 {
                     option === "proceso"
                         ? <Proceso />
                         : option === "factura" && <IndexFactura />
                 }
-
-
                 <br />
                 <Container m={5}>
                     <Cards />
