@@ -1,0 +1,185 @@
+import { rutasConToken } from "../helpers/rutas";
+
+import Swal from 'sweetalert2'
+
+//initial State
+const initialState = {
+    data: false,
+    objetos: []
+}
+
+
+//types
+const types = {
+    obtenerObjetos: '[Objetos] obtener todos los objetos',
+    eliminarObjetos: '[Objetos] Eliminar objeto',
+    crearObjeto: '[Objetos] Crear objeto'
+}
+
+
+// reducer
+export const objetosReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case types.obtenerObjetos:
+            state = { ...state, objetos: [...action.payload.objeto.docs], data: true }
+            return state;
+
+        case types.eliminarObjetos:
+            const dataresult = state.objetos.filter(dat => {
+                return dat._id !== action.payload.objetoEliminado._id
+            })
+
+            state = {
+                ...state, objetos: [...dataresult], data: true
+            }
+            return state;
+
+        case types.crearObjeto:
+
+            state = {
+                ...state,
+                objetos: [...state.objetos, action.payload.objeto], data: true
+            }
+            return state;
+
+        default:
+            return state;
+    }
+
+}
+
+// obtener objetos
+export const obtenerObjetos = () => {
+
+    return async (dispatch) => {
+        const respuestaDatos = await rutasConToken('/objeto?limit=100');
+        let body = await respuestaDatos.json()
+
+        if (body.mensaje) {
+            return Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: body.mensaje
+            })
+        } else {
+            dispatch({
+                type: types.obtenerObjetos,
+                payload: body
+            })
+        }
+
+
+    }
+}
+
+// eliminar objeto
+export const eliminarObjeto = (data) => {
+    return async (dispatch) => {
+        const respuestaDatos = await rutasConToken(`/objeto/${data._id}`, {}, 'DELETE')
+        const body = await respuestaDatos.json()
+        dispatch({
+            type: types.eliminarObjetos,
+            payload: body
+        })
+    }
+}
+
+//Crear Objeto
+export const crearObjeto = (data, imagen) => {
+
+    return async (dispatch) => {
+       if (imagen.length !== 0) {
+            try {
+
+                Swal.fire({
+                    title: 'Guardando',
+                    text: 'Espere por favor',
+                    willOpen: () => {
+                        Swal.showLoading();
+                    }
+                })
+                const urlImg = `https://api.cloudinary.com/v1_1/du8b9axwm/upload`
+                const formData = new FormData();
+                formData.append('upload_preset', 'WorkShop')
+                formData.append('file', imagen[0])
+
+                const resp = await fetch(urlImg, {
+                    method: 'POST',
+                    body: formData
+                })
+
+                if (resp.ok) {
+                    const cloudRes = await resp.json();
+
+
+                    data.img = cloudRes.secure_url
+
+                    delete data.contraseña2
+
+
+                    const dataFinal = await rutasConToken('/objeto', data, 'POST')
+                    const resultado = await dataFinal.json()
+
+
+                    dispatch({
+                        type: types.crearObjeto,
+                        payload: resultado
+                    }
+                    )
+
+                    Swal.close()
+                    Swal.fire({
+                        title: 'producto creado exitosamente',
+                        icon: 'success'
+                    })
+
+                } else {
+                    console.log(resp.json())
+                    throw await resp.json()
+
+                }
+            } catch (error) {
+                Swal.fire({
+                    title: 'producto creado exitosamente',
+                    icon: 'success',
+                    text: error
+                })
+            }
+        }
+        // si la imagen no viene
+        else {
+            try {
+
+                Swal.fire({
+                    title: 'Guardando',
+                    text: 'Espere por favor',
+                    willOpen: () => {
+                        Swal.showLoading();
+                    }
+                })
+
+                data.img = 'https://res.cloudinary.com/du8b9axwm/image/upload/v1607645626/mykft9tfjobdbu3orgyu.png'
+
+                const dataFinal = await rutasConToken('/objeto', data, 'POST')
+                const resultado = await dataFinal.json()
+
+
+                dispatch({
+                    type: types.crearObjeto,
+                    payload: resultado
+                }
+                )
+                Swal.close()
+                Swal.fire({
+                    title: 'producto creado exitosamente',
+                    icon: 'success'
+                })
+
+            } catch (error) {
+                return alert(error)
+
+            }
+    }
+
+    }
+}
