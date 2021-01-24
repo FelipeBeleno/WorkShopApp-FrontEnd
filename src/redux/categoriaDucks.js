@@ -22,26 +22,10 @@ export const categoriasReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case types.cargarCategorias:
-
-            let data = action.payload.categoria.docs;
-
-            data = data.map(res => {
-                if (res.estado === true) {
-                    res.estado = 'Activo'
-                    return res;
-                } else {
-                    res.estado = 'Incativo'
-                    return res;
-                }
-
-            })
-
-
             state = {
                 data: true,
-                categorias: data
+                categorias: action.payload
             }
-
             return state;
 
         case types.crearCategorias:
@@ -114,9 +98,10 @@ export const cargarCategorias = () => {
     return async (dispatch) => {
         const respuesta = await rutasConToken('/categoria');
         const body = await respuesta.json()
+
         dispatch({
             type: types.cargarCategorias,
-            payload: body
+            payload: body.categoria
         })
     }
 }

@@ -59,7 +59,6 @@ export const obtenerProceso = (Factura) => {
         if (body?.servicio?.fechaRegistro_iso) {
             body.servicio.fechaRegistro_iso = moment(body.servicio.fechaRegistro_iso).format("DD/MM/YYYY")
 
-
         }
 
         dispatch({

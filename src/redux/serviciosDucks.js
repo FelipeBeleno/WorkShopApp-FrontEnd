@@ -7,6 +7,7 @@ import { rutasConToken } from "../helpers/rutas";
 const initialState = {
     estado: false,
     servicios: '',
+    servicioProceso: {}
 
 }
 
@@ -17,7 +18,8 @@ const types = {
     crearServicioVenta: '[Servicio] Crear servicio de venta',
     consultarVentas: '[Servicio] Consultar servicios solo de ventas',
     consultaClientePDF: '[Servicio] consulta servicio Cliente PDF',
-    limpiarServicio: '[Servicio] limpiar Servicio'
+    limpiarServicio: '[Servicio] limpiar Servicio',
+    ejectuarProceso: '[Servicio] ejecutar proceso'
 }
 
 
@@ -54,6 +56,14 @@ export const serviciosReducer = (state = initialState, action) => {
             state = initialState;
 
             return state
+        case types.ejectuarProceso:
+            state = {
+                ...state,
+                estado: true,
+                servicioProceso: action.payload
+            }
+
+            return state;
 
         default:
             return state;
@@ -145,6 +155,8 @@ export const crearServicioVenta = (datos, productos) => {
 
     }
 }
+
+
 export const consultarFacturaCliente = (id) => {
 
     return async (dispatch) => {
@@ -172,5 +184,32 @@ export const cleanService = () => {
             type: types.limpiarServicio,
             payload: []
         })
+    }
+}
+
+export const editarServicio = (id, data, procedimientos, productos) => {
+    return async (dispatch) => {
+        const dataServicio = {
+            precioTotal: data.precioTotal,
+            objetos: productos.map(ele => {
+                return { "producto": ele._id, "cantidad": ele.cantidad, "precioUnidad": ele.precio, "nombreObjeto": ele.nombre }
+            }),
+            observaciones: data.observaciones === undefined ? [] : [{ "obj": data.observaciones }],
+            procedimientos: procedimientos.length === 0 ? [] : procedimientos.map(ele => {
+                return { "procedimientos": ele._id, "nombre": ele.nombre, "descripcion": ele.descripcion, "precio": ele.precio }
+            }),
+            procesoServicio: data.procesoServicio
+        }
+
+
+        const respuesta = await rutasConToken(`/servicio/arreglo/${id}`, dataServicio, 'PUT')
+        const body = await respuesta.json()
+
+        
+        dispatch({
+            type: types.ejectuarProceso,
+            payload: body.data
+        })
+
     }
 }

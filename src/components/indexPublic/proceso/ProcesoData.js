@@ -1,19 +1,22 @@
-import { Divider, Grid, List, ListItem, ListItemIcon, ListItemText, Step, StepLabel, Stepper } from '@material-ui/core'
+import { Divider, Grid, List, ListItem, ListItemIcon, ListItemText, Step, StepLabel, Stepper, Table, TableHead, TableBody, TableCell, TableContainer, TableRow } from '@material-ui/core'
 import React, { Fragment } from 'react'
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import { useSelector } from 'react-redux';
+
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 import TodayIcon from '@material-ui/icons/Today';
-import EmailIcon from '@material-ui/icons/Email';
-import PhoneIcon from '@material-ui/icons/Phone';
-import { useSelector } from 'react-redux';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import SettingsIcon from '@material-ui/icons/Settings';
+import EmailIcon from '@material-ui/icons/Email';
+import PhoneIcon from '@material-ui/icons/Phone';
 
 export const ProcesoData = () => {
     const publicReducer = useSelector(state => state.publicReducer);
     const { cliente } = publicReducer.arregloProceso
     const proceso = publicReducer.arregloProceso
     const pasos = ['RECIBIDO', 'EN PROCESO', 'FINALIZADO', 'VENTA']
+
+    console.log(publicReducer)
 
     return (
         <Fragment>
@@ -94,6 +97,7 @@ export const ProcesoData = () => {
 
                         </Grid>
                         <Grid item xs={1} md={1} />
+
                         <Grid item xs={12} md={4}>
                             <h1>Observaciones</h1>
                             {
@@ -107,6 +111,7 @@ export const ProcesoData = () => {
                                         )
                                     })
                             }
+
 
                         </Grid>
                         <Grid item xs={2} md={2} />
@@ -167,6 +172,53 @@ export const ProcesoData = () => {
 
                         </Grid>
                         <Grid item xs={1} md={1} />
+                        <Grid item md={12}>
+                            <h2>Procedimientos ya agregados</h2>
+                            <TableContainer>
+                                <Table size="small" aria-label="spanning table">
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>
+                                                Nombre
+                                </TableCell>
+                                            <TableCell>
+                                                Descripcion
+                                </TableCell>
+                                            <TableCell align="right">
+                                                Precio
+                                </TableCell>
+
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {
+                                            proceso.procedimientos.map(ele => {
+                                                return (
+                                                    <TableRow key={ele._id}>
+                                                        <TableCell >
+                                                            {ele.nombre}
+                                                        </TableCell>
+                                                        <TableCell >
+                                                            {ele.descripcion}
+                                                        </TableCell>
+                                                        <TableCell align="right">
+                                                            {ele.precio}
+                                                        </TableCell>
+                                                    </TableRow>
+                                                )
+                                            })
+                                        }
+                                        <TableRow>
+                                            <TableCell colSpan={0} ></TableCell>
+                                            <TableCell align="right"><b>TOTAL:</b></TableCell>
+                                            <TableCell align="right"><b>12000</b></TableCell>
+                                        </TableRow>
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+
+                        </Grid>
+                        <br />
 
                     </Grid>
                     : <h1>Nuemero de factura no existe ó esta inactiva ya</h1>

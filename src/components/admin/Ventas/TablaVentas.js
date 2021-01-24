@@ -56,8 +56,9 @@ export const TablaVentas = () => {
                     data={ventas.length === 0 ? [] : ventas.map(element => {
 
                         element.nombreCliente = element.cliente.nombre || 'no registra'
-                        element.fechaRegistro_iso = moment(element.fechaRegistro_iso).format("DD/MM/YYYY")
+                        element.fechaRegistro_iso = moment(element.fechaRegistro_iso).format("DD-MM-YYYY")
                         element.Colaborador = element.usuario.nombreApellido
+                    
                         return element
                     })}
 

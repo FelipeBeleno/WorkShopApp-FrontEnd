@@ -20,14 +20,16 @@ import InsertChartIcon from '@material-ui/icons/InsertChart';
 import ContactPhoneIcon from '@material-ui/icons/ContactPhone';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import BuildIcon from '@material-ui/icons/Build';
+import AutorenewIcon from '@material-ui/icons/Autorenew';
 
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import { Usuarios } from './Usuarios';
+import { Usuarios } from './Usuarios/Usuarios';
 import { IndexInventario } from './Inventario/IndexInventario';
 import { IndexCliente } from './Cliente/IndexCliente';
 import { IndexServicios } from './Ventas/IndexServicios';
 import { IndexTaller } from './Servicios/IndexTaller';
 import { cleanService } from '../../redux/serviciosDucks'
+import { IndexProcedimientos } from './Procedimientos/indexProcedimientos';
 
 
 
@@ -151,8 +153,6 @@ export const IndexAdmin = () => {
         localStorage.setItem('pagina', estado)
     }
 
-
-
     return (
         <div>
 
@@ -179,9 +179,12 @@ export const IndexAdmin = () => {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" noWrap className={classes.title}>
-                            Gestion
+                            <Button style={{ color: 'white' }} onClick={() => handleRedirect('')}>
+                                Gestion
+
+                            </Button>
                         </Typography>
-                        <Button onClick={handleClickLogout} variant="contained" color="secondary"> Cerrar Sesion </Button>
+                        <Button onClick={handleClickLogout} variant="contained" size="small" color="secondary"> Cerrar Sesion </Button>
 
                     </Toolbar>
                 </AppBar>
@@ -234,10 +237,15 @@ export const IndexAdmin = () => {
                             <ListItemText  >Clientes</ListItemText>
                         </ListItem>
                         <Divider />
+                        <ListItem button onClick={() => handleRedirect('Procedimientos')}>
+                            <ListItemIcon style={{ color: 'black' }}><AutorenewIcon /> </ListItemIcon>
+                            <ListItemText  >Procedimientos</ListItemText>
+                        </ListItem>
+                        <Divider />
 
                         <ListItem button onClick={() => handleRedirect('Venta')}>
                             <ListItemIcon style={{ color: 'black' }}><AttachMoneyIcon /> </ListItemIcon>
-                            <ListItemText  >Ventas / Servicios</ListItemText>
+                            <ListItemText  >Ventas</ListItemText>
                         </ListItem>
                         <Divider />
                         <ListItem button onClick={() => handleRedirect('Taller')}>
@@ -263,7 +271,11 @@ export const IndexAdmin = () => {
                                     : estadoPage === 'Venta'
                                         ? <IndexServicios />
                                         : estadoPage === 'Taller'
-                                        && <IndexTaller />
+                                            ? <IndexTaller />
+                                            : estadoPage === 'Procedimientos'
+                                                ? <IndexProcedimientos />
+                                                : estadoPage === ''
+                                                && <h1>Index Page</h1>
                     }
                 </main>
             </div>

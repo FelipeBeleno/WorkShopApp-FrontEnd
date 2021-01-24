@@ -2,10 +2,10 @@ import { Button, Grid, Typography } from '@material-ui/core'
 import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import MaterialTable from 'material-table';
-import { eliminarUsuario, obtenerUsuarios } from '../../redux/usuariosDuck';
+import { eliminarUsuario, obtenerUsuarios } from '../../../redux/usuariosDuck';
 import ControlPointIcon from '@material-ui/icons/ControlPoint';
 import { NuevoUsuarioForm } from './NuevoUsuarioForm';
-import { español } from '../../helpers/traduccionTabla';
+import { español } from '../../../helpers/traduccionTabla';
 
 export const Usuarios = () => {
 

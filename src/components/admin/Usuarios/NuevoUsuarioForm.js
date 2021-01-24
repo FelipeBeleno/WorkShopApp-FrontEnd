@@ -6,7 +6,7 @@ import { DropzoneArea } from 'material-ui-dropzone';
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux'
-import { crearUsuario } from '../../redux/usuariosDuck';
+import { crearUsuario } from '../../../redux/usuariosDuck';
 import Alert from '@material-ui/lab/Alert';
 
 

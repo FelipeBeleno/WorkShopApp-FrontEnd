@@ -26,7 +26,7 @@ export const ventasReducer = (state = initialState, action) => {
             }
             return state
 
-            
+
 
         default:
             return state
@@ -43,6 +43,18 @@ export const consultarVentas = () => {
         dispatch({
             type: types.consultarVentas,
             payload: body.ventas
+        })
+    }
+}
+
+export const consultarArreglos = () => {
+    return async (dispatch) => {
+        const respuesta = await rutasConToken(`/servicio/arreglo/activo`)
+        const body = await respuesta.json()
+
+        dispatch({
+            type: types.consultarVentas,
+            payload: body.servicios
         })
     }
 }

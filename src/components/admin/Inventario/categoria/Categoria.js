@@ -37,7 +37,12 @@ export const Categoria = () => {
                 }}
 
                 columns={columnas}
-                data={categorias}
+                data={categorias.map(ele => {
+
+                    ele.estado = ele.estado === true ? 'Activo' : 'Inactivo'
+
+                    return ele
+                })}
 
                 editable={
                     {

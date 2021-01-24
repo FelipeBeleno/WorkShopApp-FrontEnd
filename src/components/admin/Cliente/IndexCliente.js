@@ -47,9 +47,7 @@ export const IndexCliente = () => {
                             editable={{
                                 onRowAdd: newData =>
                                     new Promise((resolve, reject) => {
-
                                         dispatch(crearCliente(newData));
-
                                         resolve();
                                     }),
                                 onRowUpdate: (newData, oldData) =>
