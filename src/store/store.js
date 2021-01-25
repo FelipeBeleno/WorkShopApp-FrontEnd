@@ -8,6 +8,9 @@ import { publicReducer } from '../redux/publicDucks';
 import { serviciosReducer } from '../redux/serviciosDucks';
 import { ventasReducer } from '../redux/ventasDuck';
 import { procedimientosReducer } from '../redux/procedimientosDucks'
+import { dashboardReducer } from '../redux/dasboardDuck'
+
+
 import thunk from 'redux-thunk'
 
 
@@ -20,7 +23,8 @@ const reducersCombine = combineReducers({
     publicReducer,
     serviciosReducer,
     ventasReducer,
-    procedimientosReducer
+    procedimientosReducer,
+    dashboardReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

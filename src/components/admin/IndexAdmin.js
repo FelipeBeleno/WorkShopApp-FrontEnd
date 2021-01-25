@@ -30,6 +30,7 @@ import { IndexServicios } from './Ventas/IndexServicios';
 import { IndexTaller } from './Servicios/IndexTaller';
 import { cleanService } from '../../redux/serviciosDucks'
 import { IndexProcedimientos } from './Procedimientos/indexProcedimientos';
+import { Dashboard } from './Dashboard';
 
 
 
@@ -275,7 +276,7 @@ export const IndexAdmin = () => {
                                             : estadoPage === 'Procedimientos'
                                                 ? <IndexProcedimientos />
                                                 : estadoPage === ''
-                                                && <h1>Index Page</h1>
+                                                && <Dashboard />
                     }
                 </main>
             </div>

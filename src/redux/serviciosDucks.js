@@ -19,7 +19,7 @@ const types = {
     consultarVentas: '[Servicio] Consultar servicios solo de ventas',
     consultaClientePDF: '[Servicio] consulta servicio Cliente PDF',
     limpiarServicio: '[Servicio] limpiar Servicio',
-    ejectuarProceso: '[Servicio] ejecutar proceso'
+    ejectuarProceso: '[Servicio] ejecutar proceso',
 }
 
 

@@ -19,6 +19,7 @@ import { cleanService, editarServicio } from '../../../redux/serviciosDucks';
 import { consultarArreglos } from '../../../redux/ventasDuck';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import Swal from 'sweetalert2';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 export const GestionTaller = ({ setGestion, dataEdit }) => {
 
@@ -63,7 +64,7 @@ export const GestionTaller = ({ setGestion, dataEdit }) => {
                         setErrorTabla(true)
                         return Swal.fire({
                             title: 'Error',
-                            text: `Elimina de la lista ${ele.nombre.toUpperCase()}`,
+                            text: `Elimina de la lista ${ele.nombre.toUpperCase()}, ya se encuenta dentro de los procedimientos`,
                             icon: 'warning'
                         })
 
@@ -509,7 +510,7 @@ export const GestionTaller = ({ setGestion, dataEdit }) => {
                             <Grid item md={6}>
                                 <Button
                                     variant="contained"
-                                    endIcon={<WhatsAppIcon />}
+                                    endIcon={<ExitToAppIcon />}
                                     color="secondary"
                                     style={{ marginTop: 12, marginBottom: 10 }}
                                     fullWidth
@@ -518,14 +519,8 @@ export const GestionTaller = ({ setGestion, dataEdit }) => {
                                     Finalizar
                                     </Button>
                             </Grid>
-
                         </Grid>
-
-
-
                     }
-
-
                     <Button type="submit" fullWidth color="primary" variant="contained">actualizar </Button>
                 </Grid>
             </form>
