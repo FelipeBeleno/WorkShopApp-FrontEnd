@@ -70,8 +70,6 @@ export const obtenerClientes = () => {
     return async (dispatch) => {
         const respuestaDatos = await rutasConToken('/cliente');
         let body = await respuestaDatos.json()
-
-
         if (body.mensaje) {
             return Swal.fire({
                 icon: 'error',
@@ -130,7 +128,7 @@ export const crearCliente = (data) => {
             Swal.fire({
                 title: 'Exitoso',
                 text: 'Cliente guardado',
-                icon:'success'
+                icon: 'success'
             })
         } else {
             Swal.fire({

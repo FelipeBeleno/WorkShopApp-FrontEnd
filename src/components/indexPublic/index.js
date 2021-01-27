@@ -110,7 +110,7 @@ export const Index = () => {
                                         endIcon={<PictureAsPdfIcon />}
                                         onClick={() => setOption("factura")}
                                     >
-                                        Imprime tu Factura de venta
+                                        Imprime tu Factura
                                     </Button>
                                 </Grid>
                                 <Grid item>

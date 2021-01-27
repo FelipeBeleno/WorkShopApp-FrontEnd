@@ -146,7 +146,7 @@ export const IndexAdmin = () => {
 
 
     }
-    const [estadoPage, setEstadoPage] = useState(localStorage.getItem('pagina'));
+    const [estadoPage, setEstadoPage] = useState(localStorage.getItem('pagina') || '');
 
 
     const handleRedirect = (estado) => {

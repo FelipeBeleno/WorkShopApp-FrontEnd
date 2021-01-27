@@ -6,17 +6,22 @@ import React, { Fragment, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { pesoColombiano } from '../../helpers/pesoColombiano';
 import { obtenerDatosDashboard } from '../../redux/dasboardDuck';
+import {  obtenerObjetos } from '../../redux/objetosDuck';
 import { Estadisticas } from './Estadisticas';
 
 export const Dashboard = () => {
 
 
     const dispatch = useDispatch()
-
     useEffect(() => {
+
+        dispatch(obtenerObjetos())
+       
         dispatch(obtenerDatosDashboard())
 
     }, [dispatch])
+
+
     const dashboardReducer = useSelector(state => state.dashboardReducer)
 
 
@@ -26,7 +31,7 @@ export const Dashboard = () => {
     return (
         <Fragment>
             <Grid container spacing={3}>
-                <Grid item md={4} >
+                <Grid item md={4} xs={12} >
                     <Card style={{ background: '#28a745', color: 'white' }}>
                         <CardContent>
                             <Grid container>
@@ -46,7 +51,7 @@ export const Dashboard = () => {
                 </Grid>
 
 
-                <Grid item md={4}>
+                <Grid item md={4} xs={12}>
                     <Card style={{ background: '#ffc107', color: 'black' }}>
                         <CardContent>
                             <Grid container>
@@ -68,7 +73,7 @@ export const Dashboard = () => {
 
 
 
-                <Grid item md={4}>
+                <Grid item md={4} xs={12}>
                     <Card style={{ background: '#dc3545', color: 'white' }}>
                         <CardContent>
                             <Grid container>

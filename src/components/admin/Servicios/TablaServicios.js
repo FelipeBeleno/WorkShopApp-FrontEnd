@@ -22,7 +22,6 @@ export const TablaServicios = ({ setTallerState }) => {
     useEffect(() => {
         dispatch(cleanService())
         if (!history) {
-
             dispatch(consultarArreglos())
         } else {
 

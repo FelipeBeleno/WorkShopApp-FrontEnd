@@ -42,7 +42,50 @@ export const GestionTaller = ({ setGestion, dataEdit }) => {
 
     }, [dispatch])
 
-    console.log(servicioActual)
+    const { objetosPorAcabar } = useSelector(state => state.objetosReducer)
+
+
+    useEffect(() => {
+        if (objetosPorAcabar.length !== 0) {
+            Swal.fire({
+                title: 'Precaucion',
+
+                html: `<style type="text/css">
+                   h3{
+                    text-align: center
+                   } 
+                   table{
+                    text-align: center;
+                    margin-left: 130px;
+                    word-spacing: 10px;
+                    display: block
+                   }
+                </style>
+                <h3>Estos son los productos que estan por acabar</h3>
+                <table>
+                  <tr margin="100px">
+                    <td><b>Nombre</b></td>
+                    <td><b>Cantidad</b></td>
+                  </tr>
+                  ${objetosPorAcabar.map(ele => {
+                    return (`<tr>
+                        <td>
+                            ${ele.nombre}
+                        </td>
+                        <td>
+                            ${ele.stock}
+                        </td>
+                    </tr>`)
+                })}
+                </table>
+                `,
+                icon: 'warning'
+            })
+        }
+
+    }, [objetosPorAcabar])
+
+
 
     // cantidad dinamica en la tabla
     const handleChangeCant = (e) => {
@@ -54,10 +97,10 @@ export const GestionTaller = ({ setGestion, dataEdit }) => {
         }))
     }
 
-
     const handleSelectProcedimientos = (values) => {
+
         setErrorTabla(false)
-        if (values?.length !== 0 || values !== []) {
+        if (values?.length !== 0 || values !== null) {
             dataEdit.procedimientos.forEach(ele => {
                 values?.forEach(el => {
                     if (el === ele.nombre) {
@@ -71,21 +114,21 @@ export const GestionTaller = ({ setGestion, dataEdit }) => {
                     }
                 })
             })
-        }
 
+        } else {
+            setErrorTabla(false)
+            let arrays = values
+            let arraysDataFinal = []
 
-        setErrorTabla(false)
-        let arrays = values
-        let arraysDataFinal = []
-
-        for (const j in procedimiento) {
-            for (const i in arrays) {
-                if (procedimiento[j]?.nombre === arrays[i]) {
-                    arraysDataFinal.push(procedimiento[j])
+            for (const j in procedimiento) {
+                for (const i in arrays) {
+                    if (procedimiento[j]?.nombre === arrays[i]) {
+                        arraysDataFinal.push(procedimiento[j])
+                    }
                 }
             }
+            setProcedimientosTabla(arraysDataFinal)
         }
-        setProcedimientosTabla(arraysDataFinal)
 
     }
 
@@ -127,6 +170,7 @@ export const GestionTaller = ({ setGestion, dataEdit }) => {
         setGestion(false)
     }
     const hanldeFinish = () => {
+        dispatch(consultarArreglos())
         dispatch(cleanService())
         setGestion(false)
     }

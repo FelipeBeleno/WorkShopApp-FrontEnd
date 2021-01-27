@@ -53,7 +53,11 @@ export const serviciosReducer = (state = initialState, action) => {
             }
             return state;
         case types.limpiarServicio:
-            state = initialState;
+            state = {
+                estado: false,
+                servicios: '',
+                servicioProceso: {}
+            }
 
             return state
         case types.ejectuarProceso:
@@ -205,7 +209,7 @@ export const editarServicio = (id, data, procedimientos, productos) => {
         const respuesta = await rutasConToken(`/servicio/arreglo/${id}`, dataServicio, 'PUT')
         const body = await respuesta.json()
 
-        
+
         dispatch({
             type: types.ejectuarProceso,
             payload: body.data

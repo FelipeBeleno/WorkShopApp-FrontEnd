@@ -40,6 +40,49 @@ export const NuevoServicio = ({ setOpenService }) => {
         dispatch(obtenerObjetos());
     }, [dispatch])
 
+    const { objetosPorAcabar } = useSelector(state => state.objetosReducer)
+
+
+    useEffect(() => {
+        if (objetosPorAcabar.length !== 0) {
+            Swal.fire({
+                title: 'Precaucion',
+
+                html: `<style type="text/css">
+                   h3{
+                    text-align: center
+                   } 
+                   table{
+                    text-align: center;
+                    margin-left: 130px;
+                    word-spacing: 10px;
+                    display: block
+                   }
+                </style>
+                <h3>Estos son los productos que estan por acabar</h3>
+                <table>
+                  <tr margin="100px">
+                    <td><b>Nombre</b></td>
+                    <td><b>Cantidad</b></td>
+                  </tr>
+                  ${objetosPorAcabar.map(ele => {
+                    return (`<tr>
+                        <td>
+                            ${ele.nombre}
+                        </td>
+                        <td>
+                            ${ele.stock}
+                        </td>
+                    </tr>`)
+                })}
+                </table>
+                `,
+                icon: 'warning'
+            })
+        }
+
+    }, [objetosPorAcabar])
+
     // busqueda de cliente por numero de documento
     const clientesOption = clientes.map(res => {
         return (res.numDocumento)

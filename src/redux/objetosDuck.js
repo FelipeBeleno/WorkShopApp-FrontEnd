@@ -5,7 +5,8 @@ import Swal from 'sweetalert2'
 //initial State
 const initialState = {
     data: false,
-    objetos: []
+    objetos: [],
+    objetosPorAcabar: []
 }
 
 
@@ -13,7 +14,8 @@ const initialState = {
 const types = {
     obtenerObjetos: '[Objetos] obtener todos los objetos',
     eliminarObjetos: '[Objetos] Eliminar objeto',
-    crearObjeto: '[Objetos] Crear objeto'
+    crearObjeto: '[Objetos] Crear objeto',
+    consultaObjetosCant: '[Objetos] cantidad de objetos'
 }
 
 
@@ -21,7 +23,7 @@ const types = {
 export const objetosReducer = (state = initialState, action) => {
     switch (action.type) {
         case types.obtenerObjetos:
-            state = { ...state, objetos: [...action.payload.objeto.docs], data: true }
+            state = { ...state, objetos: [...action.payload.objeto], data: true }
             return state;
 
         case types.eliminarObjetos:
@@ -40,6 +42,27 @@ export const objetosReducer = (state = initialState, action) => {
                 ...state,
                 objetos: [...state.objetos, action.payload.objeto], data: true
             }
+
+
+            return state;
+
+        case types.consultaObjetosCant:
+
+            let objetosAcabar = []
+
+            state.objetos.forEach(ele => {
+
+                if (ele.cantidadDisponible < 11) {
+                    objetosAcabar.push({ nombre: ele.nombre, stock: ele.cantidadDisponible })
+                }
+
+            })
+
+            state = {
+                ...state,
+                objetosPorAcabar: objetosAcabar
+            }
+
             return state;
 
         default:
@@ -52,7 +75,7 @@ export const objetosReducer = (state = initialState, action) => {
 export const obtenerObjetos = () => {
 
     return async (dispatch) => {
-        const respuestaDatos = await rutasConToken('/objeto?limit=100');
+        const respuestaDatos = await rutasConToken('/objeto');
         let body = await respuestaDatos.json()
 
         if (body.mensaje) {
@@ -88,7 +111,7 @@ export const eliminarObjeto = (data) => {
 export const crearObjeto = (data, imagen) => {
 
     return async (dispatch) => {
-       if (imagen.length !== 0) {
+        if (imagen.length !== 0) {
             try {
 
                 Swal.fire({
@@ -179,7 +202,16 @@ export const crearObjeto = (data, imagen) => {
                 return alert(error)
 
             }
-    }
+        }
 
+    }
+}
+
+
+export const consultaAlertaObjetos = () => {
+    return (dispatch) => {
+        dispatch({
+            type: types.consultaObjetosCant
+        })
     }
 }
