@@ -3,6 +3,7 @@ import MaterialTable from 'material-table';
 import { español } from '../../../helpers/traduccionTabla';
 import { useDispatch, useSelector } from 'react-redux';
 import { actualizarProcedimientos, crearProcedimientos, eliminarProcedimiento, obtenerProcedimientos } from '../../../redux/procedimientosDucks'
+import { pesoColombiano } from '../../../helpers/pesoColombiano';
 
 export const IndexProcedimientos = () => {
 
@@ -28,7 +29,10 @@ export const IndexProcedimientos = () => {
                 title='Gestion Procedimientos'
                 columns={columnas}
                 localization={español}
-                data={procedimiento}
+                data={procedimiento.map(ele => {
+                    ele.precio = pesoColombiano.format(ele.precio)
+                    return ele
+                })}
                 editable={
                     {
                         onRowAdd: newData =>

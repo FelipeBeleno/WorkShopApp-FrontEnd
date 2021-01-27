@@ -31,8 +31,6 @@ export const TablaServicios = ({ setTallerState }) => {
 
     }, [dispatch, history])
 
-    console.log(servicios)
-
     const gestionProceso = (e, data) => {
         e.preventDefault()
         setGestion(true)
@@ -141,7 +139,7 @@ export const TablaServicios = ({ setTallerState }) => {
                             localization={español}
                             data={servicios.map(ele => {
                                 ele.nombreCliente = ele.cliente.nombre || 'no registra'
-                                ele.fechaRegistro_iso = moment(ele.fechaRegistro_iso, true).format("DD-MM-YYYY");
+                                ele.fechaRegistro_iso = moment(ele.fechaRegistro_iso, 'YYYY-MM-DD').format('YYYY-MM-DD');
                                 ele.Colaborador = ele.usuario.nombreApellido
                                 ele.precioTotal = ele.precioTotal || 0
                                 ele.numConsulta = ele.numConsulta || 'no registra'

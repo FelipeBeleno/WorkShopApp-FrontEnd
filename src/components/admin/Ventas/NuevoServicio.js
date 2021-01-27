@@ -14,6 +14,7 @@ import { cleanService, crearServicioVenta } from '../../../redux/serviciosDucks'
 import { DescargaPdf } from './DescargaPdf';
 import Swal from 'sweetalert2';
 import { FormNuevoCliente } from './FormNuevoCliente';
+import { pesoColombiano } from '../../../helpers/pesoColombiano';
 
 
 
@@ -244,8 +245,8 @@ export const NuevoServicio = ({ setOpenService }) => {
                                                             <TableCell>{element.nombre}</TableCell>
                                                             <TableCell>{element.cantidadDisponible}</TableCell>
                                                             <TableCell><TextField onChange={handleChangeCant} type="number" id={`cantidad${index}`} defaultValue={element.cantidad} variant="standard"></TextField></TableCell>
-                                                            <TableCell>{element.precio}</TableCell>
-                                                            <TableCell>{element.totalCompraItem}</TableCell>
+                                                            <TableCell>{pesoColombiano.format(element.precio)}</TableCell>
+                                                            <TableCell>{pesoColombiano.format(element.totalCompraItem)}</TableCell>
                                                             <TableCell><IconButton onClick={() => handleDeleteItem(element._id)}><DeleteForeverIcon style={{ color: 'red' }} /></IconButton></TableCell>
                                                         </TableRow>
 

@@ -6,6 +6,7 @@ import { DataTableCell, Table, TableBody, TableCell, TableHeader } from '@david.
 import { useSelector } from 'react-redux'
 import moment from 'moment';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
+import { pesoColombiano } from '../../../helpers/pesoColombiano';
 
 
 const styles = StyleSheet.create({
@@ -89,13 +90,11 @@ export const DescargaPdf = () => {
 
     const { clientes } = useSelector(state => state.clientesReducer)
 
-
     const clienteF = clientes.filter(elem => {
         return elem._id === servicios.cliente
     })
-
-
     const cliente = clienteF[0]
+    console.log(servicios)
 
     const Documento = () => {
 
@@ -127,7 +126,7 @@ export const DescargaPdf = () => {
                         <Text style={styles.datosFactura}>Usuario: {nombreApellido} </Text>
                         <Text style={styles.datosFactura}>Estado de servicio:{servicios.procesoServicio}</Text>
                         {/* <Text style={styles.blockTable}></Text> */}
-                        
+
                         <Text style={{ marginTop: 5, marginBottom: 5 }} >_____________________________________________________</Text>
                         {
                             servicios.tipoServicio === "VENTA"
@@ -158,9 +157,9 @@ export const DescargaPdf = () => {
                                         return (
                                             <TableBody key={index}>
                                                 <DataTableCell getContent={(element) => element.nombreObjeto} />
-                                                <DataTableCell getContent={(element) => element.precioUnidad} />
+                                                <DataTableCell getContent={(element) => pesoColombiano.format(element.precioUnidad)} />
                                                 <DataTableCell getContent={(element) => element.cantidad} />
-                                                <DataTableCell getContent={(element) => element.totalCompraItem} />
+                                                <DataTableCell getContent={(element) => pesoColombiano.format(element.totalCompraItem)} />
                                             </TableBody>
                                         )
                                     })
@@ -188,7 +187,7 @@ export const DescargaPdf = () => {
                                             <TableBody key={index}>
                                                 <DataTableCell getContent={(element) => element.nombre} />
                                                 <DataTableCell getContent={(element) => element.descripcion} />
-                                                <DataTableCell getContent={(element) => element.precio} />
+                                                <DataTableCell getContent={(element) => pesoColombiano.format(element.precio)} />
                                             </TableBody>
                                         )
                                     })
@@ -197,8 +196,8 @@ export const DescargaPdf = () => {
                         }
                         {
                             servicios.tipoServicio === "ARREGLO"
-                                ? <Text style={{ textAlign: 'right', fontSize: 15, marginRight: 140 }}>{`TOTAL: ${servicios.precioTotal}`}</Text>
-                                : <Text style={{ textAlign: 'right', fontSize: 15, marginRight: 80 }}>{`TOTAL: ${servicios.precioTotal}`}</Text>
+                                ? <Text style={{ textAlign: 'right', fontSize: 15, marginRight: 140 }}>{`TOTAL: ${pesoColombiano.format(servicios.precioTotal)}`}</Text>
+                                : <Text style={{ textAlign: 'right', fontSize: 15, marginRight: 80 }}>{`TOTAL: ${pesoColombiano.format(servicios.precioTotal)}`}</Text>
                         }
                         {
                             servicios.tipoServicio === "ARREGLO"

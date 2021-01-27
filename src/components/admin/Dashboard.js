@@ -4,19 +4,25 @@ import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import SettingsIcon from '@material-ui/icons/Settings';
 import React, { Fragment, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { pesoColombiano } from '../../helpers/pesoColombiano';
 import { obtenerDatosDashboard } from '../../redux/dasboardDuck';
+import { Estadisticas } from './Estadisticas';
 
 export const Dashboard = () => {
 
 
     const dispatch = useDispatch()
-    const dashboardReducer = useSelector(state => state.dashboardReducer)
 
     useEffect(() => {
         dispatch(obtenerDatosDashboard())
-    }, [dispatch])
 
-    console.log(dashboardReducer)
+    }, [dispatch])
+    const dashboardReducer = useSelector(state => state.dashboardReducer)
+
+
+    const { reporteTresMeses } = dashboardReducer
+
+
     return (
         <Fragment>
             <Grid container spacing={3}>
@@ -67,7 +73,7 @@ export const Dashboard = () => {
                         <CardContent>
                             <Grid container>
                                 <Grid item md={12}>
-                                    <Typography variant="h3" align="center">$ {dashboardReducer.totalRecaudadoVentas} </Typography>
+                                    <Typography variant="h3" align="center"> {pesoColombiano.format(dashboardReducer.totalRecaudadoVentas)} </Typography>
                                 </Grid>
                                 <Grid item md={12}>
                                     <Typography variant="h5" align="center"> Total Recaudado mes ventas</Typography>
@@ -83,6 +89,12 @@ export const Dashboard = () => {
                 </Grid>
 
             </Grid>
+            {
+                reporteTresMeses !== undefined
+                && <Estadisticas reporteTresMeses={reporteTresMeses} />
+            }
+
+
         </Fragment>
     )
 }

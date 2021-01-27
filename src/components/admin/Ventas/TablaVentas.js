@@ -5,6 +5,8 @@ import moment from 'moment'
 import { useDispatch, useSelector } from 'react-redux';
 import { consultarVentas } from '../../../redux/ventasDuck';
 import { español } from '../../../helpers/traduccionTabla';
+import { pesoColombiano } from '../../../helpers/pesoColombiano';
+import { cleanService } from '../../../redux/serviciosDucks';
 
 
 
@@ -14,6 +16,8 @@ export const TablaVentas = () => {
     const dispatch = useDispatch()
     const { ventas } = useSelector(state => state.ventasReducer)
     useEffect(() => {
+        dispatch(cleanService())
+
 
         dispatch(consultarVentas())
 
@@ -56,9 +60,10 @@ export const TablaVentas = () => {
                     data={ventas.length === 0 ? [] : ventas.map(element => {
 
                         element.nombreCliente = element.cliente.nombre || 'no registra'
-                        element.fechaRegistro_iso = moment(element.fechaRegistro_iso).format("DD-MM-YYYY")
+                        element.fechaRegistro_iso = moment(element.fechaRegistro_iso, "YYYY-MM-DD").format("YYYY-MM-DD")
                         element.Colaborador = element.usuario.nombreApellido
-                    
+                        element.precioTotal = pesoColombiano.format(element.precioTotal)
+
                         return element
                     })}
 

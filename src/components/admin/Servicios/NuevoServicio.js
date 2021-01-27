@@ -14,6 +14,7 @@ import { FormNuevoCliente } from '../Ventas/FormNuevoCliente'
 import Swal from 'sweetalert2';
 import { crearServicioVenta } from '../../../redux/serviciosDucks';
 import { DescargaPdf } from '../Ventas/DescargaPdf';
+import { pesoColombiano } from '../../../helpers/pesoColombiano';
 
 
 export const NuevoServicio = ({ setTallerState }) => {
@@ -169,7 +170,7 @@ export const NuevoServicio = ({ setTallerState }) => {
                                                     <TableRow key={element._id}>
                                                         <TableCell>{element.nombre}</TableCell>
                                                         <TableCell>{element.descripcion}</TableCell>
-                                                        <TableCell>{element.precio}</TableCell>
+                                                        <TableCell>{pesoColombiano.format(element.precio)}</TableCell>
                                                         <TableCell><IconButton onClick={() => handleDeleteItem(element._id)}><DeleteForeverIcon style={{ color: 'red' }} /></IconButton></TableCell>
                                                     </TableRow>
                                                 )
