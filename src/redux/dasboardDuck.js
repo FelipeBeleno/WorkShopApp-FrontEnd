@@ -54,10 +54,8 @@ export const obtenerDatosDashboard = () => {
         const respuesta = await rutasConToken('/servicios/dec')
         const respuestaArr = await rutasConToken('/servicios/arr')
         const bodyArr = await respuestaArr.json()
-
         const respuestaReport = await rutasConToken('/servicios/tercerMes')
         const bodyReport = await respuestaReport.json()
-
 
         const tercerMesNombre = moment(new Date()).subtract(3, 'month').date(1).format('MMMM')
         const segundoMesNombre = moment(new Date()).subtract(2, 'month').date(1).format('MMMM')
