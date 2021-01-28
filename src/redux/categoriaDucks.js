@@ -82,10 +82,10 @@ export const categoriasReducer = (state = initialState, action) => {
 
 // Crear Categorias
 export const nuevaCategoria = (data) => {
-
     return async (dispatch) => {
         const resultado = await rutasConToken('/categoria', data, 'POST');
         const body = await resultado.json();
+        console.log(body)
         dispatch({
             type: types.crearCategorias,
             payload: body

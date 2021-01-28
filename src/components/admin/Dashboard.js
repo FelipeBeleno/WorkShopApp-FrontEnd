@@ -6,8 +6,9 @@ import React, { Fragment, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { pesoColombiano } from '../../helpers/pesoColombiano';
 import { obtenerDatosDashboard } from '../../redux/dasboardDuck';
-import {  obtenerObjetos } from '../../redux/objetosDuck';
+import { obtenerObjetos } from '../../redux/objetosDuck';
 import { Estadisticas } from './Estadisticas';
+
 
 export const Dashboard = () => {
 
@@ -16,7 +17,7 @@ export const Dashboard = () => {
     useEffect(() => {
 
         dispatch(obtenerObjetos())
-       
+
         dispatch(obtenerDatosDashboard())
 
     }, [dispatch])

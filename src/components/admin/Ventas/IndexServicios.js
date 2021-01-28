@@ -1,16 +1,21 @@
 import { Button, Grid, Typography } from '@material-ui/core'
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import { NuevoServicio } from './NuevoServicio';
 import { TablaVentas } from './TablaVentas'
-
-
-
+import { obtenerObjetos } from '../../../redux/objetosDuck';
+import { useDispatch } from 'react-redux';
 
 
 export const IndexServicios = () => {
 
     const [openService, setOpenService] = useState(false)
+    const dispatch = useDispatch()
+    
+    useEffect(() => {
+        dispatch(obtenerObjetos());
+    }, [dispatch])
+
 
     return (
 

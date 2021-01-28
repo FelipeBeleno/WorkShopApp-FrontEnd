@@ -9,7 +9,7 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 //import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import { useDispatch, useSelector } from 'react-redux'
 import { obtenerClientes } from '../../../redux/clientesDuck';
-import { obtenerObjetos } from '../../../redux/objetosDuck';
+import { obtenerObjetos, consultaAlertaObjetos } from '../../../redux/objetosDuck';
 import { cleanService, crearServicioVenta } from '../../../redux/serviciosDucks';
 import { DescargaPdf } from './DescargaPdf';
 import Swal from 'sweetalert2';
@@ -38,6 +38,7 @@ export const NuevoServicio = ({ setOpenService }) => {
     useEffect(() => {
         dispatch(obtenerClientes())
         dispatch(obtenerObjetos());
+        dispatch(consultaAlertaObjetos())
     }, [dispatch])
 
     const { objetosPorAcabar } = useSelector(state => state.objetosReducer)

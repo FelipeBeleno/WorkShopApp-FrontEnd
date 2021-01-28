@@ -57,11 +57,21 @@ export const IndexProcedimientos = () => {
                             }),
                     }
                 }
-                options={
-                    {
-                        actionsColumnIndex: -1
-                    }
-                }
+
+                style={{
+                    marginTop: 50,
+                    justifyContent: 'center',
+
+                }}
+                options={{
+                    actionsColumnIndex: -1,
+                    loadingType: "overlay",
+                    padding: 'default',
+                    headerStyle: {
+                        padding: '10px',
+                    },
+                    exportButton: true
+                }}
 
 
             />

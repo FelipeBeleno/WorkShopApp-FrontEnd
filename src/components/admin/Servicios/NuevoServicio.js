@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
 import { crearServicioVenta } from '../../../redux/serviciosDucks';
 import { DescargaPdf } from '../Ventas/DescargaPdf';
 import { pesoColombiano } from '../../../helpers/pesoColombiano';
+import { consultaAlertaObjetos, obtenerObjetos } from '../../../redux/objetosDuck';
 
 
 export const NuevoServicio = ({ setTallerState }) => {
@@ -31,11 +32,13 @@ export const NuevoServicio = ({ setTallerState }) => {
 
     useEffect(() => {
         dispatch(obtenerClientes())
+        dispatch(obtenerObjetos())
         dispatch(obtenerProcedimientos())
+        dispatch(consultaAlertaObjetos())
+
     }, [dispatch])
 
     const { objetosPorAcabar } = useSelector(state => state.objetosReducer)
-
 
     useEffect(() => {
         if (objetosPorAcabar.length !== 0) {

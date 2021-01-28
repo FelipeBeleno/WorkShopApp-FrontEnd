@@ -4,7 +4,7 @@ import { useForm, Controller } from 'react-hook-form';
 import Alert from '@material-ui/lab/Alert';
 import { useDispatch, useSelector } from 'react-redux';
 import { cargarCategorias } from '../../../../redux/categoriaDucks';
-import { crearObjeto } from '../../../../redux/objetosDuck';
+import { crearObjeto, obtenerObjetos } from '../../../../redux/objetosDuck';
 import { DropzoneArea } from 'material-ui-dropzone';
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 
@@ -18,6 +18,7 @@ export const ProductoForm = ({ open, onClose }) => {
 	const [file, setFile] = React.useState('');
 	const onSubmit = data => {
 		dispatch(crearObjeto(data, file))
+		dispatch(obtenerObjetos());
 		onClose()
 	};
 
@@ -100,12 +101,13 @@ export const ProductoForm = ({ open, onClose }) => {
 							</Grid>
 							{/* =====================select categorias============== */}
 
-							<Grid item md={12} >
+							<Grid item md={12} xs={12} >
 								<FormControl fullWidth>
 									<InputLabel >Categoria</InputLabel>
 									<Controller
 										control={control}
 										name="categoria"
+										fullWidth
 										as={
 											<Select>
 												{categorias.map((categoria, indx) =>

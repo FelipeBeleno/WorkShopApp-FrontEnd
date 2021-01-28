@@ -8,12 +8,14 @@ const initialState = {
     numArreglos: 0,
     numVentas: 0,
     totalRecaudadoVentas: 0,
-    reporteTresMeses: undefined
+    reporteTresMeses: undefined,
+    reporteDia: {}
 }
 
 const types = {
-    obtenerDatos: '[Obtener Datos] consulta de datos Dashboard',
-    tresMeses: '[Obtener Datos tres meses atras] datos tres meses'
+    obtenerDatos: '[Dasboard] consulta de datos Dashboard',
+    tresMeses: '[Dasboard] datos tres meses',
+    reporteDia: '[Dasboard] obtener datos de un dia en especifico'
 }
 
 export const dashboardReducer = (state = initialState, action) => {
@@ -21,12 +23,21 @@ export const dashboardReducer = (state = initialState, action) => {
     switch (action.type) {
         case types.obtenerDatos:
             state = {
+                ...state,
                 numArreglos: action.payload.pendientes,
                 numVentas: action.payload.numeroVentasMes,
                 totalRecaudadoVentas: action.payload.totalVendidoMes,
-                reporteTresMeses: action.payload.tresMeses
+                reporteTresMeses: action.payload.tresMeses,
+                reporteDia: {}
             }
+            return state;
 
+        case types.reporteDia:
+
+            state = {
+                ...state,
+                reporteDia: action.payload
+            }
 
             return state;
 
@@ -88,3 +99,60 @@ export const obtenerDatosDashboard = () => {
     }
 }
 
+export const reporteDiaCalendar = (fecha = new Date()) => {
+    return async (dispatch) => {
+        const fechaFinal = moment(fecha).format('YYYY-MM-DD')
+        const respuesta = await rutasConToken(`/servicios/total/${fechaFinal}`)
+        const body = await respuesta.json()
+
+        const numeroArreglos = body.servicios.reduce((count, ele) => {
+            if (ele.tipoServicio === 'ARREGLO') {
+                count += 1
+            }
+            return count
+        }, 0);
+
+        const numVentas = body.servicios.reduce((count, ele) => {
+            if (ele.tipoServicio === 'VENTA') {
+                count += 1
+            }
+            return count
+        }, 0);
+
+        const ingresosDia = body.servicios.reduce((count, ele) => {
+            count += ele.precioTotal
+            return count
+        }, 0);
+
+        const fechaConsulta = fechaFinal;
+
+        const totalVentas = body.servicios.reduce((count, ele) => {
+            if (ele.tipoServicio === 'VENTA') {
+                count += ele.precioTotal
+            }
+            return count
+        }, 0);
+
+        const totalArreglos = body.servicios.reduce((count, ele) => {
+            if (ele.tipoServicio === 'ARREGLO') {
+                count += ele.precioTotal
+            }
+            return count
+        }, 0);
+
+        const data = {
+            numeroArreglos,
+            numVentas,
+            fechaConsulta,
+            totalVentas,
+            totalArreglos,
+            ingresosDia
+        }
+
+        dispatch({
+            type: types.reporteDia,
+            payload: data
+        })
+
+    }
+}

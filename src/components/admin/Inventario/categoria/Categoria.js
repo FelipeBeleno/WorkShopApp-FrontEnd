@@ -18,24 +18,18 @@ export const Categoria = () => {
 
     const columnas = [
         {
-            title: 'nombre',
+            title: 'Nombre',
             field: 'nombre'
         },
         {
-            title: 'estado',
-            field: 'estado'
+            title: 'Descripcion',
+            field: 'descripcion'
         }
     ]
 
     return (
         <div>
             <MaterialTable
-                style={{
-                    marginTop: 50,
-                    justifyContent: 'center',
-
-                }}
-
                 columns={columnas}
                 data={categorias.map(ele => {
 
@@ -51,7 +45,6 @@ export const Categoria = () => {
                                 dispatch(nuevaCategoria(newData))
                                 resolve()
                             }),
-
                         onRowDelete: oldData =>
                             new Promise((resolve, reject) => {
                                 setTimeout(() => {
@@ -80,7 +73,7 @@ export const Categoria = () => {
                     }
                 }
 
-                title='Usuarios'
+                title='Categorias'
                 options={{
                     actionsColumnIndex: -1,
                     loadingType: "overlay",
@@ -89,6 +82,11 @@ export const Categoria = () => {
                         padding: '10px',
                     },
                     exportButton: true
+                }}
+                style={{
+                    marginTop: 50,
+                    justifyContent: 'center',
+
                 }}
                 localization={español}
             />

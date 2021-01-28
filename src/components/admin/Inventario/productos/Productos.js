@@ -5,7 +5,6 @@ import MaterialTable from 'material-table';
 import { español } from '../../../../helpers/traduccionTabla';
 import { obtenerObjetos } from '../../../../redux/objetosDuck';
 import { ProductoForm } from './ProductoForm';
-import { pesoColombiano } from '../../../../helpers/pesoColombiano';
 
 export const Productos = () => {
   const dispatch = useDispatch();
@@ -65,19 +64,19 @@ export const Productos = () => {
         <ProductoForm open={dialog} onClose={onCloseDialog} />
       </div>
       <MaterialTable
+
+        columns={columns}
+        data={productos.map(element => {
+          element.estado = element.estado === true ? 'Activo' : 'Inactivo'
+          
+          return element
+        })}
+        title='Objetos'
         style={{
           marginTop: 50,
           justifyContent: 'center',
 
         }}
-
-        columns={columns}
-        data={productos.map(element => {
-          element.estado = element.estado === true ? 'Activo' : 'Inactivo'
-          element.precio = pesoColombiano.format(element.precio)
-          return element
-        })}
-        title='Objetos'
         options={{
           actionsColumnIndex: -1,
           loadingType: "overlay",

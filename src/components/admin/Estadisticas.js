@@ -1,9 +1,17 @@
-import { Box, Grid, Typography } from '@material-ui/core';
-import React, { useEffect } from 'react'
+import { Box, Grid, List, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
+import React, { useEffect, useState } from 'react'
 import Chart from "react-google-charts";
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 import { consultaAlertaObjetos } from '../../redux/objetosDuck';
+import DatePicker from 'react-date-picker';
+import { reporteDiaCalendar } from '../../redux/dasboardDuck';
+import EventAvailableIcon from '@material-ui/icons/EventAvailable';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import SettingsIcon from '@material-ui/icons/Settings';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import { pesoColombiano } from '../../helpers/pesoColombiano';
+
 
 
 export const Estadisticas = ({ reporteTresMeses }) => {
@@ -13,10 +21,12 @@ export const Estadisticas = ({ reporteTresMeses }) => {
 
         dispatch(consultaAlertaObjetos())
 
+
     }, [dispatch])
 
     const { objetosPorAcabar } = useSelector(state => state.objetosReducer)
-
+    const { reporteDia } = useSelector(state => state.dashboardReducer)
+    console.log(reporteDia)
 
     useEffect(() => {
         if (objetosPorAcabar.length !== 0) {
@@ -84,10 +94,95 @@ export const Estadisticas = ({ reporteTresMeses }) => {
         [reporteTresMeses.mesActual.nombre, mesActual, '#003399'],
 
     ]
+
+    const [fecha, setFecha] = useState(new Date())
+
+    const handleChangeFecha = (fechaSeleccionada) => {
+
+
+        if (fechaSeleccionada !== null) {
+            setFecha(fechaSeleccionada)
+            dispatch(reporteDiaCalendar(fechaSeleccionada))
+        }
+
+    }
+
     return (
         <Box align="center" mt={5}>
-            <Grid container>
-                <Grid item md={12}>
+            <Grid container spacing={3}>
+                <Grid item md={4} xs={12}>
+                    <Typography variant="h3" style={{ marginBottom: 15 }}>Resumen de dia</Typography>
+                    <h3>Selecciona el dia a consultar</h3>
+
+                    <DatePicker
+                        onChange={handleChangeFecha}
+                        value={fecha}
+                        maxDate={new Date()}
+                        locale="es-CO"
+                        defaultValue="dd-m-yyyy"
+                    />
+                    {
+                        reporteDia.fechaConsulta
+                        &&
+                        <List >
+                            <ListItem>
+                                <ListItemIcon >
+                                    <EventAvailableIcon />
+                                </ListItemIcon>
+                                <ListItemText>
+                                    Fecha: {reporteDia.fechaConsulta}
+                                </ListItemText>
+                            </ListItem>
+                            <ListItem>
+                                <ListItemIcon >
+                                    <ShoppingCartIcon />
+                                </ListItemIcon>
+                                <ListItemText>
+                                    Numero Ventas: {reporteDia.numVentas}
+                                </ListItemText>
+                            </ListItem>
+                            <ListItem>
+                                <ListItemIcon >
+                                    <SettingsIcon />
+                                </ListItemIcon>
+                                <ListItemText>
+                                    Numero Arreglos: {reporteDia.numeroArreglos}
+                                </ListItemText>
+                            </ListItem>
+
+                            <ListItem>
+                                <ListItemIcon >
+                                    <AttachMoneyIcon />
+                                </ListItemIcon>
+                                <ListItemText>
+                                    Ingreso Total Ventas: {pesoColombiano.format(reporteDia.totalVentas)}
+                                </ListItemText>
+                            </ListItem>
+
+                            <ListItem>
+                                <ListItemIcon >
+                                    <AttachMoneyIcon />
+                                </ListItemIcon>
+                                <ListItemText>
+                                    Ingreso Total Arreglos: {pesoColombiano.format(reporteDia.totalArreglos)}
+                                </ListItemText>
+                            </ListItem>
+
+                            <ListItem>
+                                <ListItemIcon >
+                                    <AttachMoneyIcon />
+                                </ListItemIcon>
+                                <ListItemText>
+                                    Ingreso dia: {pesoColombiano.format(reporteDia.ingresosDia)}
+                                </ListItemText>
+                            </ListItem>
+                        </List>
+
+
+                    }
+                </Grid>
+
+                <Grid item md={8} xs={12}>
                     <Typography variant="h3" style={{ marginBottom: 15 }}>Reportes de ultimos tres meses</Typography>
                     <Chart
                         width={500}
@@ -108,10 +203,9 @@ export const Estadisticas = ({ reporteTresMeses }) => {
                     />
 
                 </Grid>
-
             </Grid>
 
-        </Box>
+        </Box >
 
 
     )

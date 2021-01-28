@@ -94,7 +94,6 @@ export const DescargaPdf = () => {
         return elem._id === servicios.cliente
     })
     const cliente = clienteF[0]
-    console.log(servicios)
 
     const Documento = () => {
 
