@@ -114,7 +114,7 @@ export const NuevoServicio = ({ setTallerState }) => {
         if (data.cliente.length === 0) {
             return Swal.fire({
                 title: 'Error',
-                text: 'El campo cliente debe estar lleno con un capo valido',
+                text: 'Debe selecciona un cliente',
                 icon: 'warning'
             })
         } else if (productosTabla.length === 0) {
@@ -159,7 +159,7 @@ export const NuevoServicio = ({ setTallerState }) => {
                     <Grid item md={8} xs={12}>
 
                         <Fragment>
-                            <h1 style={{ textAlign: 'center' }}>Seleccion Servicios </h1>
+                            <h1 style={{ textAlign: 'center' }}>Selección Servicios </h1>
                             <Fragment>
                                 <Box align="center">
                                     <Grid item xs={12} md={8} style={{ marginTop: 5 }} >
@@ -197,7 +197,7 @@ export const NuevoServicio = ({ setTallerState }) => {
                                                 Servicio
                                         </TableCell>
                                             <TableCell>
-                                                Descripcion
+                                                Descripción
                                         </TableCell>
                                             <TableCell>
                                                 Precio

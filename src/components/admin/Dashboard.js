@@ -60,7 +60,7 @@ export const Dashboard = () => {
                                     <Typography variant="h3" align="center">{dashboardReducer.numArreglos}</Typography>
                                 </Grid>
                                 <Grid item md={12}>
-                                    <Typography variant="h5" align="center"> Arreglos pendientes por gestion</Typography>
+                                    <Typography variant="h5" align="center"> Arreglos pendientes por gestión</Typography>
                                 </Grid>
 
                                 <Grid item md={12} align="center">
@@ -82,7 +82,7 @@ export const Dashboard = () => {
                                     <Typography variant="h3" align="center"> {pesoColombiano.format(dashboardReducer.totalRecaudadoVentas)} </Typography>
                                 </Grid>
                                 <Grid item md={12}>
-                                    <Typography variant="h5" align="center"> Total Recaudado mes ventas</Typography>
+                                    <Typography variant="h5" align="center"> Total recaudado mes ventas</Typography>
                                 </Grid>
 
                                 <Grid item md={12} align="center">

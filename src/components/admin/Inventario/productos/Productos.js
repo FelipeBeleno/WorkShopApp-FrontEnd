@@ -35,7 +35,7 @@ export const Productos = () => {
     { title: 'Nombre', field: 'nombre' },
     { title: 'Cantidad', field: 'cantidadDisponible' },
     { title: 'Precio', field: 'precio' },
-    { title: 'Categoria', field: 'category' },
+    { title: 'Categoría', field: 'category' },
     { title: 'Usuario', field: 'user' },
     { title: 'Estado', field: 'estado' },
     {

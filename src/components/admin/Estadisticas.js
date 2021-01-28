@@ -110,8 +110,8 @@ export const Estadisticas = ({ reporteTresMeses }) => {
         <Box align="center" mt={5}>
             <Grid container spacing={3}>
                 <Grid item md={4} xs={12}>
-                    <Typography variant="h3" style={{ marginBottom: 15 }}>Resumen del dia</Typography>
-                    <h3>Selecciona el dia a consultar</h3>
+                    <Typography variant="h3" style={{ marginBottom: 15 }}>Resumen del día</Typography>
+                    <h3>Selecciona el día a consultar</h3>
 
                     <DatePicker
                         onChange={handleChangeFecha}
@@ -172,7 +172,7 @@ export const Estadisticas = ({ reporteTresMeses }) => {
                                     <AttachMoneyIcon />
                                 </ListItemIcon>
                                 <ListItemText>
-                                    Ingreso dia: {pesoColombiano.format(reporteDia.ingresosDia)}
+                                    Ingreso Total Día: {pesoColombiano.format(reporteDia.ingresosDia)}
                                 </ListItemText>
                             </ListItem>
                         </List>

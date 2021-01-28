@@ -242,7 +242,7 @@ export const DescargaPdf = () => {
             <a
                 style={{ color: 'white', textDecoration: 'none' }}
                 rel="noreferrer"
-                href={`https://api.whatsapp.com/send?phone=57${cliente.telefono}&text=Hola%20${cliente.nombre},%20descarga%20tu%20factura%20aqui%0D%0A${process.env.REACT_APP_FRONT_END_URL}%0D%0Acodigo%20unico%20de%20tu%20factura%20es%20tu%20numero%20de%20identificacion%20mas%20el%20numero%20de%20tu%20factura%20${servicios.numServicio}%20codigo:%20${cliente.numDocumento}${servicios.numServicio}`}
+                href={`https://api.whatsapp.com/send?phone=57${cliente.telefono}&text=Hola%20${cliente.nombre},%20descarga%20tu%20factura%20aqui%0D%0A${process.env.REACT_APP_FRONT_END_URL}%0D%0Acódigo%20único%20de%20tu%20factura%20es%20tu%20numero%20de%20identificacion%20mas%20el%20numero%20de%20tu%20factura%20${servicios.numServicio}%20codigo:%20${cliente.numDocumento}${servicios.numServicio}`}
                 target="_blank">
                 <Button
                     variant="contained"

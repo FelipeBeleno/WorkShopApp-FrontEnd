@@ -22,7 +22,7 @@ export const Categoria = () => {
             field: 'nombre'
         },
         {
-            title: 'Descripcion',
+            title: 'Descripción',
             field: 'descripcion'
         }
     ]
@@ -73,7 +73,7 @@ export const Categoria = () => {
                     }
                 }
 
-                title='Categorias'
+                title='Categorías'
                 options={{
                     actionsColumnIndex: -1,
                     loadingType: "overlay",

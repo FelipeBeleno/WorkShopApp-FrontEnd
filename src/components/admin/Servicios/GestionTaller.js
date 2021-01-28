@@ -329,7 +329,7 @@ export const GestionTaller = ({ setGestion, dataEdit }) => {
                 <Grid container spacing={2}>
                     <Grid item md={6}>
                         <Fragment>
-                            <label>Selecciona Estado de servicio</label>
+                            <label>Selecciona estado de servicio</label>
                             <Controller
                                 control={control}
                                 name="procesoServicio"
@@ -538,7 +538,7 @@ export const GestionTaller = ({ setGestion, dataEdit }) => {
                                 <a
                                     style={{ color: 'white', textDecoration: 'none', width: '100vh' }}
                                     rel="noreferrer"
-                                    href={`https://api.whatsapp.com/send?phone=57${servicioActual.servicioProceso.cliente.telefono}&text=Hola%20${servicioActual.servicioProceso.cliente.nombre},%20el%20estado%20de%20tu%20proceso%20cambio%20a%20${servicioActual.servicioProceso.procesoServicio}%20consulta%20toda%20la%20info%20aqui%20${process.env.REACT_APP_FRONT_END_URL}%20codigo%20unico%20de%20tu%20proceso%20es%20tu%20numero%20de%20identificacion%20mas%20el%20numero%20de%20tu%20factura%20${servicioActual.servicioProceso.numServicio}%20codigo:%20${servicioActual.servicioProceso.cliente.numDocumento}${servicioActual.servicioProceso.numServicio}%20recuerda%20que%20si%20el%20estado%20de%20tu%20factura%20es%20FINALIZADO%20debes%20consultar%20por%20generar%20factura.`}
+                                    href={`https://api.whatsapp.com/send?phone=57${servicioActual.servicioProceso.cliente.telefono}&text=Hola%20${servicioActual.servicioProceso.cliente.nombre},%20el%20estado%20de%20tu%20proceso%20cambio%20a%20${servicioActual.servicioProceso.procesoServicio}%20consulta%20toda%20la%20info%20aqui%20${process.env.REACT_APP_FRONT_END_URL}%20código%20único%20de%20tu%20proceso%20es%20tu%20numero%20de%20identificacion%20mas%20el%20numero%20de%20tu%20factura%20${servicioActual.servicioProceso.numServicio}%20codigo:%20${servicioActual.servicioProceso.cliente.numDocumento}${servicioActual.servicioProceso.numServicio}%20recuerda%20que%20si%20el%20estado%20de%20tu%20factura%20es%20FINALIZADO%20debes%20consultar%20por%20generar%20factura.`}
                                     target="_blank">
                                     <Button
                                         variant="contained"

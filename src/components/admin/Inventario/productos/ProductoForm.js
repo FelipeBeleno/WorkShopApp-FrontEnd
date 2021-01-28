@@ -103,7 +103,7 @@ export const ProductoForm = ({ open, onClose }) => {
 
 							<Grid item md={12} xs={12} >
 								<FormControl fullWidth>
-									<InputLabel >Categoria</InputLabel>
+									<InputLabel >Categoría</InputLabel>
 									<Controller
 										control={control}
 										name="categoria"

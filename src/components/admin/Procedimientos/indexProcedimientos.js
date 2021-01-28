@@ -16,7 +16,7 @@ export const IndexProcedimientos = () => {
 
     const columnas = [
         { field: 'nombre', title: 'Nombre' },
-        { field: 'descripcion', title: 'Descripcion' },
+        { field: 'descripcion', title: 'Descripción' },
         { field: 'precio', title: 'Precio' }
     ]
 
@@ -26,7 +26,7 @@ export const IndexProcedimientos = () => {
         <Fragment>
             <h1 style={{ textAlign: 'center' }}>Procedimientos para servicios</h1>
             <MaterialTable
-                title='Gestion Procedimientos'
+                title='Gestión Procedimientos'
                 columns={columnas}
                 localization={español}
                 data={procedimiento.map(ele => {

@@ -18,9 +18,9 @@ export const IndexCliente = () => {
     }, [dispatch])
     const columnas = [
         { title: 'Nombre', field: 'nombre' },
-        { title: 'numDocumento', field: 'numDocumento' },
-        { title: 'email', field: 'email' },
-        { title: 'telefono', field: 'telefono' }
+        { title: 'Numero Documento', field: 'numDocumento' },
+        { title: 'Email', field: 'email' },
+        { title: 'Teléfono', field: 'telefono' }
     ];
     return (
 
@@ -40,7 +40,7 @@ export const IndexCliente = () => {
 
                             }}
 
-                            title='clientes'
+                            title='Clientes'
                             columns={columnas}
 
                             data={estadoClientes.clientes}

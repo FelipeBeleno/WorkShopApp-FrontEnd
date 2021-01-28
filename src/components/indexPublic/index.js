@@ -89,7 +89,7 @@ export const Index = () => {
                             TALLER Y VENTAS SAS
                         </Typography>
                         <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                            Consulta el estado en el que esta tu proceso de una manera rapida y facil.
+                            Consulta el estado en el que esta tu proceso de una manera rápida y fácil.
                          </Typography>
                         <div className={classes.heroButtons}>
                             <Grid container spacing={2} justify="center">

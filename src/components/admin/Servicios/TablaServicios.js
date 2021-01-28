@@ -104,7 +104,7 @@ export const TablaServicios = ({ setTallerState }) => {
                         <Fragment> {/* Menu con botones */}
                             <Grid container style={{ margin: 15 }} spacing={2}>
                                 <Grid item md={12} xs={12} style={{ textAlign: 'center' }}>
-                                    <Typography variant="h3">Gestion de procesos</Typography>
+                                    <Typography variant="h3">Gestión de procesos</Typography>
                                 </Grid>
 
 

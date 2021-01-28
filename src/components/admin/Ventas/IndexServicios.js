@@ -23,7 +23,7 @@ export const IndexServicios = () => {
             {
                 !openService
                 && <Fragment>
-                    <Typography variant="h4" align="center" style={{ margin: 40 }}>Modulo Ventas </Typography>
+                    <Typography variant="h4" align="center" style={{ margin: 40 }}>Módulo Ventas </Typography>
                     <Grid container spacing={3}>
                         <Grid item md={3} />
                         <Grid item xs={12} md={6}>

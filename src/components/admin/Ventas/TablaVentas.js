@@ -46,7 +46,7 @@ export const TablaVentas = () => {
         },
         {
             field: 'numConsulta',
-            title: 'id consulta'
+            title: 'Id consulta'
         }
     ]
     const eliminarRegistro = (data) => {
