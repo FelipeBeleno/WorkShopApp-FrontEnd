@@ -42,7 +42,6 @@ export const Dashboard = () => {
                                 <Grid item md={12}>
                                     <Typography variant="h5" align="center"> Ventas realizadas este mes</Typography>
                                 </Grid>
-
                                 <Grid item md={12} align="center">
                                     <LocalMallIcon align="center" style={{ fontSize: 70 }} />
                                 </Grid>
