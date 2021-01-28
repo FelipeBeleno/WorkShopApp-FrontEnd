@@ -10,7 +10,7 @@ import { obtenerObjetos } from '../../redux/objetosDuck';
 import { Estadisticas } from './Estadisticas';
 
 
-export const Dashboard = () => {
+export const Dashboard = ({ setEstadoPage }) => {
 
 
     const dispatch = useDispatch()
@@ -53,7 +53,7 @@ export const Dashboard = () => {
 
 
                 <Grid item md={4} xs={12}>
-                    <Card style={{ background: '#ffc107', color: 'black' }}>
+                    <Card style={{ background: '#ffc107', color: 'black' }} onClick={() => setEstadoPage('Taller')}>
                         <CardContent>
                             <Grid container>
                                 <Grid item md={12}>

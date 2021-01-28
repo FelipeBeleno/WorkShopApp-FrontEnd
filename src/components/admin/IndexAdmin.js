@@ -220,36 +220,36 @@ export const IndexAdmin = () => {
                     <List style={{ color: 'black' }}>
                         <Divider />
 
-                        <ListItem button onClick={() => handleRedirect('Usuario')}>
+                        <ListItem button onClick={() => handleRedirect('Usuario')} title="Usuarios">
 
                             <ListItemIcon style={{ color: 'black' }}><SupervisorAccountIcon /> </ListItemIcon>
                             <ListItemText > Usuarios </ListItemText>
 
                         </ListItem>
                         <Divider />
-                        <ListItem button onClick={() => handleRedirect('Inventario')}>
+                        <ListItem button onClick={() => handleRedirect('Inventario')} title="Inventario">
                             <ListItemIcon style={{ color: 'black' }}><InsertChartIcon /> </ListItemIcon>
                             <ListItemText  >Inventario</ListItemText>
                         </ListItem>
                         <Divider />
 
-                        <ListItem button onClick={() => handleRedirect('Cliente')}>
+                        <ListItem button onClick={() => handleRedirect('Cliente')} title="Clientes">
                             <ListItemIcon style={{ color: 'black' }}><ContactPhoneIcon /> </ListItemIcon>
                             <ListItemText  >Clientes</ListItemText>
                         </ListItem>
                         <Divider />
-                        <ListItem button onClick={() => handleRedirect('Procedimientos')}>
+                        <ListItem button onClick={() => handleRedirect('Procedimientos')} title="Procedimientos">
                             <ListItemIcon style={{ color: 'black' }}><AutorenewIcon /> </ListItemIcon>
                             <ListItemText  >Procedimientos</ListItemText>
                         </ListItem>
                         <Divider />
 
-                        <ListItem button onClick={() => handleRedirect('Venta')}>
+                        <ListItem button onClick={() => handleRedirect('Venta')} title="Ventas">
                             <ListItemIcon style={{ color: 'black' }}><AttachMoneyIcon /> </ListItemIcon>
                             <ListItemText  >Ventas</ListItemText>
                         </ListItem>
                         <Divider />
-                        <ListItem button onClick={() => handleRedirect('Taller')}>
+                        <ListItem button onClick={() => handleRedirect('Taller')} title="Taller">
                             <ListItemIcon style={{ color: 'black' }}><BuildIcon /> </ListItemIcon>
                             <ListItemText  >Taller</ListItemText>
                         </ListItem>
@@ -276,7 +276,7 @@ export const IndexAdmin = () => {
                                             : estadoPage === 'Procedimientos'
                                                 ? <IndexProcedimientos />
                                                 : estadoPage === ''
-                                                && <Dashboard />
+                                                && <Dashboard setEstadoPage={setEstadoPage} />
                     }
                 </main>
             </div>
