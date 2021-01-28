@@ -15,7 +15,9 @@ const types = {
     obtenerObjetos: '[Objetos] obtener todos los objetos',
     eliminarObjetos: '[Objetos] Eliminar objeto',
     crearObjeto: '[Objetos] Crear objeto',
-    consultaObjetosCant: '[Objetos] cantidad de objetos'
+    consultaObjetosCant: '[Objetos] cantidad de objetos',
+    editarObjeto: '[Objetos] editar objeto'
+
 }
 
 
@@ -27,8 +29,9 @@ export const objetosReducer = (state = initialState, action) => {
             return state;
 
         case types.eliminarObjetos:
+
             const dataresult = state.objetos.filter(dat => {
-                return dat._id !== action.payload.objetoEliminado._id
+                return dat._id !== action.payload._id
             })
 
             state = {
@@ -42,7 +45,20 @@ export const objetosReducer = (state = initialState, action) => {
                 ...state,
                 objetos: [...state.objetos, action.payload.objeto], data: true
             }
+            return state;
 
+
+        case types.editarObjeto:
+
+            const arrEdit = state.objetos.filter(ele => {
+                return ele._id !== action.payload._id
+            })
+            arrEdit.push(action.payload)
+
+            state = {
+                ...state,
+                objetos: arrEdit
+            }
 
             return state;
 
@@ -69,6 +85,30 @@ export const objetosReducer = (state = initialState, action) => {
             return state;
     }
 
+}
+
+
+export const editaObjeto = (data) => {
+
+    return async (dispatch) => {
+
+        delete data.estado
+        const respuesta = await rutasConToken(`/objeto/${data._id}`, data, 'PUT')
+        const body = await respuesta.json()
+        if (body.ok) {
+            dispatch({
+                type: types.editarObjeto,
+                payload: body.objeto
+            })
+        } else {
+
+            return Swal.fire({
+                title: 'Error',
+                text: 'El campo cantidad y/o precio deben ser numericos',
+                icon: "error"
+            })
+        }
+    }
 }
 
 // obtener objetos
@@ -98,11 +138,12 @@ export const obtenerObjetos = () => {
 // eliminar objeto
 export const eliminarObjeto = (data) => {
     return async (dispatch) => {
+
         const respuestaDatos = await rutasConToken(`/objeto/${data._id}`, {}, 'DELETE')
         const body = await respuestaDatos.json()
         dispatch({
             type: types.eliminarObjetos,
-            payload: body
+            payload: body.objetoActualizado
         })
     }
 }

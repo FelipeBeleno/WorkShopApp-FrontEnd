@@ -22,6 +22,7 @@ export const Dashboard = () => {
 
     }, [dispatch])
 
+    const usuario = useSelector(state => state.loginReducer)
 
     const dashboardReducer = useSelector(state => state.dashboardReducer)
 
@@ -95,6 +96,8 @@ export const Dashboard = () => {
 
             </Grid>
             {
+                usuario.role === "ADMIN_ROLE"
+                &&
                 reporteTresMeses !== undefined
                 && <Estadisticas reporteTresMeses={reporteTresMeses} />
             }

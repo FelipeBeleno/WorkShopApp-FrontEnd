@@ -19,6 +19,8 @@ export const TablaServicios = ({ setTallerState }) => {
     const dispatch = useDispatch()
     const [history, setHistory] = useState(false)
 
+    const usuario = useSelector(state => state.loginReducer)
+
     useEffect(() => {
         dispatch(cleanService())
         if (!history) {
@@ -66,22 +68,30 @@ export const TablaServicios = ({ setTallerState }) => {
     ]
 
     const eliminarRegistro = (data) => {
-        Swal.fire({
-            title: 'Confirme la eliminacion del registro',
-            text: "Una vez borrado no se podra recuperar",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, Eliminar',
-            cancelButtonText: 'Cancelar operacion'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                return dispatch(eliminarVentaServicio(data._id))
-            } else {
-                console.log('cancelado')
-            }
-        })
+        if (usuario.role === 'ADMIN_ROLE') {
+
+            Swal.fire({
+                title: 'Confirme la eliminacion del registro',
+                text: "Una vez borrado no se podra recuperar",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, Eliminar',
+                cancelButtonText: 'Cancelar operacion'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    return dispatch(eliminarVentaServicio(data._id))
+                } else {
+                    console.log('cancelado')
+                }
+            })
+        } else {
+            Swal.fire({
+                title: 'Error de permisos',
+                text: 'No tienes permisos para borrar una venta'
+            })
+        }
 
     }
 

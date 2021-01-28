@@ -3,8 +3,9 @@ import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import MaterialTable from 'material-table';
 import { español } from '../../../../helpers/traduccionTabla';
-import { obtenerObjetos } from '../../../../redux/objetosDuck';
+import { editaObjeto, eliminarObjeto, obtenerObjetos } from '../../../../redux/objetosDuck';
 import { ProductoForm } from './ProductoForm';
+import Swal from 'sweetalert2';
 
 export const Productos = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,8 @@ export const Productos = () => {
   useEffect(() => {
     dispatch(obtenerObjetos());
   }, [dispatch])
+  const usuario = useSelector(state => state.loginReducer)
+
 
   let { objetos } = useSelector(state => state.objetosReducer)
   var productos = objetos.map((prod) => {
@@ -68,7 +71,7 @@ export const Productos = () => {
         columns={columns}
         data={productos.map(element => {
           element.estado = element.estado === true ? 'Activo' : 'Inactivo'
-          
+
           return element
         })}
         title='Objetos'
@@ -86,6 +89,33 @@ export const Productos = () => {
           },
           exportButton: true
         }}
+        editable={
+          {
+            onRowUpdate: (newData, oldData) =>
+              new Promise((resolve, reject) => {
+
+                dispatch(editaObjeto(newData))
+                resolve();
+
+              }),
+            onRowDelete: oldData =>
+              new Promise((resolve, reject) => {
+                if (usuario.role === 'ADMIN_ROLE') {
+
+                  dispatch(eliminarObjeto(oldData))
+                  resolve()
+                } else {
+                  Swal.fire({
+                    title: 'Error',
+                    text: 'no tienes permisos para eliminar un producto',
+                    icon: 'error'
+                  })
+                  resolve()
+                }
+
+              }),
+          }
+        }
         localization={español}
       />
     </div>

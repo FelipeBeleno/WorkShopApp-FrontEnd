@@ -26,13 +26,11 @@ export const Estadisticas = ({ reporteTresMeses }) => {
 
     const { objetosPorAcabar } = useSelector(state => state.objetosReducer)
     const { reporteDia } = useSelector(state => state.dashboardReducer)
-    console.log(reporteDia)
 
     useEffect(() => {
         if (objetosPorAcabar.length !== 0) {
             Swal.fire({
                 title: 'Precaucion',
-
                 html: `<style type="text/css">
                    h3{
                     text-align: center
@@ -94,6 +92,7 @@ export const Estadisticas = ({ reporteTresMeses }) => {
         [reporteTresMeses.mesActual.nombre, mesActual, '#003399'],
 
     ]
+
 
     const [fecha, setFecha] = useState(new Date())
 

@@ -92,6 +92,7 @@ export const consultarArreglosInactivos = () => {
 
 export const eliminarVentaServicio = (id) => {
     return async (dispatch) => {
+
         const respuesta = await rutasConToken(`/servicio/borrar/${id}`, {}, 'DELETE')
         const body = await respuesta.json()
         dispatch({

@@ -45,6 +45,8 @@ export const GestionTaller = ({ setGestion, dataEdit }) => {
     const { objetosPorAcabar } = useSelector(state => state.objetosReducer)
 
 
+    console.log(procedimientosTabla)
+    console.log(errorTabla)
     useEffect(() => {
         if (objetosPorAcabar.length !== 0) {
             Swal.fire({
@@ -114,21 +116,19 @@ export const GestionTaller = ({ setGestion, dataEdit }) => {
                     }
                 })
             })
+        }
+        let arrays = values
+        let arraysDataFinal = []
 
-        } else {
-            setErrorTabla(false)
-            let arrays = values
-            let arraysDataFinal = []
 
-            for (const j in procedimiento) {
-                for (const i in arrays) {
-                    if (procedimiento[j]?.nombre === arrays[i]) {
-                        arraysDataFinal.push(procedimiento[j])
-                    }
+        for (const j in procedimiento) {
+            for (const i in arrays) {
+                if (procedimiento[j]?.nombre === arrays[i]) {
+                    arraysDataFinal.push(procedimiento[j])
                 }
             }
-            setProcedimientosTabla(arraysDataFinal)
         }
+        setProcedimientosTabla(arraysDataFinal)
 
     }
 
