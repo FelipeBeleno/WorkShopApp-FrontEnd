@@ -18,7 +18,7 @@ export const IndexCliente = () => {
     }, [dispatch])
     const columnas = [
         { title: 'Nombre', field: 'nombre' },
-        { title: 'Numero Documento', field: 'numDocumento' },
+        { title: 'Número Documento', field: 'numDocumento' },
         { title: 'Email', field: 'email' },
         { title: 'Teléfono', field: 'telefono' }
     ];
@@ -26,7 +26,7 @@ export const IndexCliente = () => {
 
         <Fragment>
             <Typography align="center" variant="h3" >
-                Gestion de Clientes
+                Gestión de Clientes
 	    </Typography>
             {
                 usuario.length === 0

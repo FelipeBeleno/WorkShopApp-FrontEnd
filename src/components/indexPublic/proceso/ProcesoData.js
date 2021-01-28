@@ -21,7 +21,8 @@ export const ProcesoData = ({ setOption }) => {
         setOption('')
         Swal.fire({
             title: 'Error',
-            text: 'El codigo ingresado es invalido'
+            text: 'El codigo ingresado es invalido',
+            icon:'error'
         })
     }
 
