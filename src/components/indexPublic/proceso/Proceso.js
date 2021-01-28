@@ -9,7 +9,7 @@ import Alert from '@material-ui/lab/Alert';
 import SearchIcon from '@material-ui/icons/Search';
 
 
-export const Proceso = () => {
+export const Proceso = ({ setOption }) => {
 
     const { errors, register, handleSubmit } = useForm()
     const [formActive, setFormActive] = useState(true)
@@ -63,7 +63,7 @@ export const Proceso = () => {
                         : dataReceived === false
                             ? <Fragment><CircularProgress color="primary" /> </Fragment>
                             : dataReceived === true
-                            && <ProcesoData />
+                            && <ProcesoData setOption={setOption} />
                 }
 
 

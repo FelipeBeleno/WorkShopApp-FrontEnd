@@ -77,16 +77,17 @@ export const IndexFactura = () => {
     const { errors, register, handleSubmit } = useForm()
     const dispatch = useDispatch()
 
+    const { servicios } = useSelector(state => state.serviciosReducer)
+
+
+    const [pdgGenerate, setPdgGenerate] = useState(false)
+
+
 
     const onSubmit = (data, e) => {
         e.preventDefault()
         dispatch(consultarFacturaCliente(data.id))
     }
-
-    const { servicios } = useSelector(state => state.serviciosReducer)
-
-
-    const [pdgGenerate, setPdgGenerate] = useState(false)
 
 
     const Documento = () => {

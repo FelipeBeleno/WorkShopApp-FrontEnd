@@ -12,7 +12,8 @@ const initialState = {
 // types 
 
 const types = {
-    cargarArreglo: '[Public] cargar arreglo'
+    cargarArreglo: '[Public] cargar arreglo',
+    clean: '[Public] limpial arreglo',
 }
 
 // reducer
@@ -39,6 +40,15 @@ export const publicReducer = (state = initialState, action) => {
                 return state;
             }
 
+        case types.clean:
+            state = {
+                active: false,
+                arregloProceso: [],
+                error: []
+            }
+
+            return state
+
 
         default:
             return state;
@@ -64,6 +74,15 @@ export const obtenerProceso = (Factura) => {
         dispatch({
             type: types.cargarArreglo,
             payload: body
+        })
+    }
+
+}
+
+export const cleanProceso = () => {
+    return (dispatch) => {
+        dispatch({
+            type: types.clean,
         })
     }
 

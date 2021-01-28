@@ -22,8 +22,8 @@ export const español = {
     },
     pagination: {
         labelDisplayedRows: '{from}-{to} de {count}',
-        labelRowsSelect: 'lineas',
-        labelRowsPerPage: 'pagina por lineas:',
+        labelRowsSelect: 'líneas',
+        labelRowsPerPage: 'pagina por líneas:',
         firstAriaLabel: 'Primera pagina',
         firstTooltip: 'Primera Pagina',
         previousAriaLabel: 'Pagina Anterior',
@@ -35,7 +35,7 @@ export const español = {
     },
     toolbar: {
         addRemoveColumns: 'Agregar o quitar columnas',
-        nRowsSelected: '{0} Linea(s) Seleccionada(s)',
+        nRowsSelected: '{0} Línea(s) Seleccionada(s)',
         showColumnsTitle: 'Ver columnas',
         showColumnsAriaLabel: 'Ver columnas',
         exportTitle: 'Exportar',

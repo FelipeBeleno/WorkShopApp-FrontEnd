@@ -13,6 +13,8 @@ import { Cards } from './Cards';
 import { Footer } from './Footer';
 import { Proceso } from './proceso/Proceso';
 import { IndexFactura } from './factura/IndexFactura';
+import { useDispatch } from 'react-redux';
+import { cleanProceso } from '../../redux/publicDucks';
 
 
 function ElevationScroll(props) {
@@ -27,7 +29,6 @@ function ElevationScroll(props) {
         elevation: trigger ? 4 : 0,
     });
 }
-
 
 const useStyles = makeStyles((theme) => ({
     toolbarTitle: {
@@ -56,11 +57,27 @@ const useStyles = makeStyles((theme) => ({
 
 }))
 
+
+
 export const Index = () => {
+
+    const dispatch = useDispatch()
+
 
     const classes = useStyles();
 
     const [option, setOption] = useState(false)
+
+
+    const handleProceso = () => {
+        dispatch(cleanProceso())
+        setOption("proceso")
+    }
+
+    const handleFactura = () => {
+        dispatch(cleanProceso())
+        setOption("factura")
+    }
 
     return (
         <Fragment >
@@ -98,7 +115,7 @@ export const Index = () => {
                                         variant="contained"
                                         color="primary"
                                         endIcon={<SettingsIcon />}
-                                        onClick={() => setOption("proceso")}
+                                        onClick={handleProceso}
                                     >
                                         Consulta tu proceso
                                     </Button>
@@ -108,7 +125,7 @@ export const Index = () => {
                                         variant="contained"
                                         color="secondary"
                                         endIcon={<PictureAsPdfIcon />}
-                                        onClick={() => setOption("factura")}
+                                        onClick={handleFactura}
                                     >
                                         Imprime tu Factura
                                     </Button>
@@ -125,7 +142,7 @@ export const Index = () => {
                 </div>
                 {
                     option === "proceso"
-                        ? <Proceso />
+                        ? <Proceso setOption={setOption} />
                         : option === "factura" && <IndexFactura />
                 }
                 <br />
@@ -137,7 +154,7 @@ export const Index = () => {
             <footer>
                 <Footer />
             </footer>
-        </Fragment>
+        </Fragment >
 
     );
 }

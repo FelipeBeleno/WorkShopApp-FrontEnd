@@ -166,8 +166,7 @@ export const consultarFacturaCliente = (id) => {
     return async (dispatch) => {
         const respuesta = await rutasConToken(`/servicios/clientes/ventas/${id}`)
         const body = await respuesta.json()
-
-        if (body.ok === false) {
+        if (body.ok === false || body.venta.length === 0) {
             Swal.fire({
                 title: 'Error',
                 text: 'Id invalido',
