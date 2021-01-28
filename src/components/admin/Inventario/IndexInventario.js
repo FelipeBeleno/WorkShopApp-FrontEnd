@@ -11,8 +11,10 @@ export const IndexInventario = () => {
     return (
         <Fragment>
             <Box m={3}>
+                <Typography variant="h3" align="center" style={{ marginTop: 40, marginBottom: 20 }}>Selección Inventario</Typography>
                 <Grid container>
                     <Grid item xs={1} md={1} />
+                    
                     <Grid item xs={12} md={4} lg={4} xl={4}>
                         <Button
                             variant="contained"
@@ -25,7 +27,7 @@ export const IndexInventario = () => {
                         </Button>
                     </Grid>
                     <Grid item xs={1} md={1} />
-                    <br />
+                  
 
                     <Grid item xs={12} md={4} lg={4} xl={4}>
 
@@ -46,8 +48,8 @@ export const IndexInventario = () => {
                     option === 'categoria'
                         ? <Categoria />
                         : option === 'producto'
-                            ? <Productos />
-                            : <Typography variant="h3" align="center" style={{ marginTop: 40 }}>Index Inventario</Typography>
+                        && <Productos />
+
                 }
             </Box>
         </Fragment>

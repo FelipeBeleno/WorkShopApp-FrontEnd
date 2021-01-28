@@ -48,7 +48,7 @@ export const Usuarios = () => {
         <Fragment>
             <Typography align="center" variant="h3" >
 
-                Gestion de usuarios
+                Gestión de usuarios
             </Typography>
 
 
