@@ -68,7 +68,7 @@ export const objetosReducer = (state = initialState, action) => {
 
             state.objetos.forEach(ele => {
 
-                if (ele.cantidadDisponible < 6) {
+                if (ele.cantidadDisponible <= 5) {
                     objetosAcabar.push({ nombre: ele.nombre, stock: ele.cantidadDisponible })
                 }
 
