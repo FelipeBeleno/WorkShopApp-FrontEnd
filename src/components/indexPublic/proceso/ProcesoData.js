@@ -16,7 +16,6 @@ export const ProcesoData = ({ setOption }) => {
     const proceso = publicReducer.arregloProceso
     const pasos = ['RECIBIDO', 'EN PROCESO', 'FINALIZADO', 'VENTA']
 
-
     const hanldeBusqueda = () => {
         setOption('')
     }

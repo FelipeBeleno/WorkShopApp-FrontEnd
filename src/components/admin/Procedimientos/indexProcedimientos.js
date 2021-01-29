@@ -3,6 +3,7 @@ import MaterialTable from 'material-table';
 import { español } from '../../../helpers/traduccionTabla';
 import { useDispatch, useSelector } from 'react-redux';
 import { actualizarProcedimientos, crearProcedimientos, eliminarProcedimiento, obtenerProcedimientos } from '../../../redux/procedimientosDucks'
+import { Typography } from '@material-ui/core';
 
 export const IndexProcedimientos = () => {
 
@@ -23,7 +24,9 @@ export const IndexProcedimientos = () => {
 
     return (
         <Fragment>
-            <h1 style={{ textAlign: 'center' }}>Procedimientos para servicios</h1>
+            <Typography align="center" variant="h3" >
+                Gestión de Procedimientos
+            </Typography>
             <MaterialTable
                 title='Gestión Procedimientos'
                 columns={columnas}
