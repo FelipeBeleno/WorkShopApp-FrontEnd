@@ -60,7 +60,7 @@ export const Dashboard = ({ setEstadoPage }) => {
                                     <Typography variant="h3" align="center">{dashboardReducer.numArreglos}</Typography>
                                 </Grid>
                                 <Grid item md={12}>
-                                    <Typography variant="h5" align="center"> Arreglos pendientes por gestión</Typography>
+                                    <Typography variant="h5" align="center"> Procedimientos por gestión</Typography>
                                 </Grid>
 
                                 <Grid item md={12} align="center">

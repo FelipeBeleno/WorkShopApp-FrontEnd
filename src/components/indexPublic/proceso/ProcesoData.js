@@ -1,4 +1,4 @@
-import { Divider, Grid, List, ListItem, ListItemIcon, ListItemText, Step, StepLabel, Stepper, Table, TableHead, TableBody, TableCell, TableContainer, TableRow } from '@material-ui/core'
+import { Divider, Grid, List, ListItem, ListItemIcon, ListItemText, Step, StepLabel, Stepper, Table, TableHead, TableBody, TableCell, TableContainer, TableRow, Button, Box } from '@material-ui/core'
 import React, { Fragment } from 'react'
 import { useSelector } from 'react-redux';
 
@@ -9,7 +9,6 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import SettingsIcon from '@material-ui/icons/Settings';
 import EmailIcon from '@material-ui/icons/Email';
 import PhoneIcon from '@material-ui/icons/Phone';
-import Swal from 'sweetalert2';
 
 export const ProcesoData = ({ setOption }) => {
     const publicReducer = useSelector(state => state.publicReducer);
@@ -17,20 +16,16 @@ export const ProcesoData = ({ setOption }) => {
     const proceso = publicReducer.arregloProceso
     const pasos = ['RECIBIDO', 'EN PROCESO', 'FINALIZADO', 'VENTA']
 
-    if (!publicReducer.active) {
+
+    const hanldeBusqueda = () => {
         setOption('')
-        Swal.fire({
-            title: 'Error',
-            text: 'El codigo ingresado es invalido',
-            icon:'error'
-        })
     }
 
     return (
         <Fragment>
             {
                 publicReducer.active
-                    && <Grid container style={{ background: 'white', textAlign: "center", marginBottom: 60, padding: 20 }}>
+                    ? <Grid container style={{ background: 'white', textAlign: "center", marginBottom: 60, padding: 20 }}>
 
                         <Grid item xs={12}>
                             <h1>Estado de proceso</h1>
@@ -228,8 +223,15 @@ export const ProcesoData = ({ setOption }) => {
                         <br />
 
                     </Grid>
-                  
-                  
+                    : <Grid item md={12}>
+                        <Box align="center">
+                            <h1 style={{ textAlign: 'center' }}>Id invalido, busque nuevamente</h1>
+                            <Button color="secondary" variant="contained" onClick={hanldeBusqueda}> Volver a Buscar
+                    </Button>
+                        </Box>
+                    </Grid>
+
+
             }
 
         </Fragment>
