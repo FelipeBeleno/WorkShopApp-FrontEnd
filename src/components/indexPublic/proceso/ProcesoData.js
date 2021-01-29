@@ -19,6 +19,7 @@ export const ProcesoData = ({ setOption }) => {
     const hanldeBusqueda = () => {
         setOption('')
     }
+    console.log(proceso)
 
     return (
         <Fragment>
@@ -209,10 +210,14 @@ export const ProcesoData = ({ setOption }) => {
                                                 )
                                             })
                                         }
+
                                         <TableRow>
                                             <TableCell colSpan={0} ></TableCell>
                                             <TableCell align="right"><b>TOTAL:</b></TableCell>
-                                            <TableCell align="right"><b>12000</b></TableCell>
+                                            <TableCell align="right"><b>{proceso.procedimientos.reduce((count, ele) => {
+                                                count += ele.precio
+                                                return count
+                                            }, 0)}</b></TableCell>
                                         </TableRow>
                                     </TableBody>
                                 </Table>
